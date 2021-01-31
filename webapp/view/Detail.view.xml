@@ -1,0 +1,54 @@
+<mvc:View
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.basf.techInterview.test1.CompanyEmployees.controller.Detail">
+	<ObjectHeader
+		icon="{parts: [ {path:'Photo'}], formatter: '.formatter.setPhotograph'}"
+		iconDensityAware="false"
+		iconAlt="{FirstName}"
+		imageShape="Circle"
+		responsive="true"
+		title="{TitleOfCourtesy} {FirstName} {LastName}"
+		intro="{Title}"
+		class="sapUiResponsivePadding--header" >
+			<ObjectAttribute title="Employee Id" text="{EmployeeID}" />
+			<ObjectAttribute title="Date of Birth" text = "{parts:[{path:'BirthDate'}], formatter:'.formatter.dateFormatter'}"/> 
+			<ObjectAttribute title="Date of Hiring" text= "{parts:[{path:'BirthDate'}], formatter:'.formatter.dateFormatter'}"/> 
+			<ObjectAttribute title="Address" text="{Address}" />
+			<ObjectAttribute title="City" text="{City}" />
+			<ObjectAttribute title="Region" text="{= ${Region}  ? ${Region} : 'Not Available' }" />
+			
+			<ObjectAttribute title="Post Code" text="{PostalCode}" />
+			<ObjectAttribute title="Country" text="{Country}" />
+			<ObjectAttribute title="Phone" text="{HomePhone}" />
+			<ObjectAttribute title="Extension" text="{Extension}" />
+			
+	</ObjectHeader>
+	<VBox>
+		<Panel
+	
+		headerText="About {TitleOfCourtesy} {LastName}"
+		width="100%">
+		<Title
+			id="WrappingTitle"
+			wrapping="true"
+			text="{Notes}" />
+	</Panel>
+	<IconTabBar select="onTabChange"
+		expanded="true"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter text="Hirearchy" key="hirearchy">
+				<Text text="Info content goes here ..." />
+			</IconTabFilter>
+			<IconTabFilter text="Map" key="map">
+				<HBox width="20rem" height="15rem" id="idGoogleMaps" fitContainer = "true" justifyContent="Center" alignContent="Center" alignItems="Center">
+					
+				</HBox>
+			</IconTabFilter>
+			
+		</items>
+	</IconTabBar>
+	</VBox>
+
+	</mvc:View>
