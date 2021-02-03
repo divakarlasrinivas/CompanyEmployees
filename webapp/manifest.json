@@ -84,21 +84,21 @@
 				},
 				"async": true
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "master",
-					"target": "master"
-				},
-				{
-					"pattern": "Employees/{objectId}",
-					"name": "object",
-					"target": [
-						"master",
-						"object"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "master",
+				"target": "master"
+			}, {
+				"pattern": "Employees/{objectId}",
+				"name": "object",
+				"target": ["master", "object"]
+			}, {
+				"name": "managerDetails",
+				"pattern": "Employees/{managerId}",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["managerDetails"]
+			}],
 			"targets": {
 				"master": {
 					"viewName": "Master",
@@ -109,7 +109,8 @@
 					"viewName": "Detail",
 					"viewId": "detail",
 					"viewLevel": 1,
-					"controlAggregation": "midColumnPages"
+					"controlAggregation": "midColumnPages",
+					"transition": "flip"
 				},
 				"detailObjectNotFound": {
 					"viewName": "DetailObjectNotFound",
@@ -119,8 +120,18 @@
 				"notFound": {
 					"viewName": "NotFound",
 					"viewId": "notFound"
+				},
+				"managerDetails": {
+					"viewType": "",
+					"transition": "",
+					"clearControlAggregation": "",
+					"viewName": "Detail",
+					"viewLevel": 3,
+					"viewId": "detail",
+					"controlAggregation": "midColumnPages"
 				}
 			}
-		}
+		},
+		"flexEnabled": true
 	}
 }

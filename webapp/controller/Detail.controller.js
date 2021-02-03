@@ -180,7 +180,12 @@ sap.ui.define([
 			this.showMap();
 		},
 		navigateToManager: function (oEvent) {
-			console.log("TODO");
+			
+			this.getRouter().navTo("managerDetails", {
+				managerId : oEvent.getSource().getBindingContext().getObject().ReportsTo,
+			
+			}, true);
+			
 		},
 		/* =========================================================== */
 		/* begin: internal methods                                     */

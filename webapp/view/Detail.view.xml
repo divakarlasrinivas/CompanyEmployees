@@ -22,7 +22,7 @@
 			<ObjectAttribute title="Country" text="{Country}" />
 			<ObjectAttribute title="Phone" text="{HomePhone}" />
 			<ObjectAttribute title="Extension" text="{Extension}" />
-			<ObjectAttribute title="Line Manager" active="true" press="navigateToManager" text="{parts:[{path:'detailView>/lineManager'}], formatter:'.formatter.getMyManagerName'}" />
+			<ObjectAttribute title="Line Manager" active="{=${ReportsTo} === null ?false:true}" press="navigateToManager" text="{parts:[{path:'detailView>/lineManager'}], formatter:'.formatter.getMyManagerName'}" />
 	</ObjectHeader>
 	
 	<VBox>
