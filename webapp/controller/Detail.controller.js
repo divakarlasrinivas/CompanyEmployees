@@ -9,6 +9,7 @@ sap.ui.define([
 	// shortcut for sap.m.URLHelper
 	var URLHelper = mobileLibrary.URLHelper;
 	var _self = null;
+	var mapHolder = null;
 	return BaseController.extend("com.basf.techInterview.test1.CompanyEmployees.controller.Detail", {
 
 		formatter: formatter,
@@ -17,7 +18,7 @@ sap.ui.define([
 		/* lifecycle methods                                           */
 		/* =========================================================== */
 		onAfterRendering: function () {
-			
+
 		},
 
 		onInit: function () {
@@ -36,43 +37,56 @@ sap.ui.define([
 			this.setModel(oViewModel, "detailView");
 
 			this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
-		
+
 		},
 		_getProperty: function (name) {
-			return this.getView().getBindingContext().getProperty(name);
+
+			return name ? this.getView().getBindingContext().getProperty(name) : "";
 		},
-		updateMap: function(position, sPath){
+		updateMap: function (position, sPath) {
 			var geo = new google.maps.Geocoder();
+			var map;
 			window.mapOptions = {
 				center: position,
-			    zoom: 18,
-			    mapTypeId: "satellite",
-			    heading: 90,
-			    tilt: 45,
+				zoom: 18,
+				mapTypeId: "satellite",
+				heading: 90,
+				tilt: 45,
 			}
-			this.getView().byId("idGoogleMaps").destroyItems();
-			var map = new google.maps.Map(this.getView().byId("idGoogleMaps").getDomRef(), window.mapOptions);
-			
-			// var infoWindow = new google.maps.InfoWindow;
-			// var geocoder = new google.maps.Geocoder();
+
+			map = mapHolder = new google.maps.Map(this.getView().byId("idGoogleMaps").getDomRef(), window.mapOptions);
+
 			var marker = new google.maps.Marker({
 				map: map,
-				position: position
+				position: position,
+				animation: google.maps.Animation.DROP,
 			});
+			// local event listner for animation
+			function toggleBounce() {
+				if (marker.getAnimation() !== null) {
+					marker.setAnimation(null);
+				} else {
+					marker.setAnimation(google.maps.Animation.BOUNCE);
+				}
+			}
+			marker.addListener("click", toggleBounce);
+
 			map.setTilt(45);
 		},
-		showMap: function(){
-				var selectedAddress = this._getProperty("Address");
-				var region = this._getProperty("Region");
-				var postCode = this._getProperty("PostalCode");
-				var country = this._getProperty("Country");
-				this._getLatLongFromAdresss(selectedAddress + region + postCode + country).done(function (response) {
-					if (response.results.length > 0) {
-						var result = response.results[0];
-						this.updateMap(result.geometry.location, this.getView().getBindingContext().sPath);
-						
-					}
-				}.bind(this));
+
+		showMap: function () {
+
+			var selectedAddress = this._getProperty("Address");
+			var region = this._getProperty("Region") || "";
+			var postCode = this._getProperty("PostalCode");
+			var country = this._getProperty("Country");
+			this._getLatLongFromAdresss(selectedAddress + region + postCode + country).done(function (response) {
+				if (response.results.length > 0) {
+					var result = response.results[0];
+					this.updateMap(result.geometry.location, this.getView().getBindingContext().sPath);
+
+				}
+			}.bind(this));
 		},
 		onTabChange: function (oEvent) {
 			console.log("selected tab is " + oEvent.getSource().getSelectedKey());
@@ -131,19 +145,43 @@ sap.ui.define([
 			var sTitle,
 				iTotalItems = oEvent.getParameter("total"),
 				oViewModel = this.getModel("detailView");
-
+			var manager;
+			var managerPath;
 			// only update the counter if the length is final
 			if (this.byId("lineItemsList").getBinding("items").isLengthFinal()) {
 				if (iTotalItems) {
 					sTitle = this.getResourceBundle().getText("detailLineItemTableHeadingCount", [iTotalItems]);
 				} else {
-					//Display 'Line Items' instead of 'Line items (0)'
+
 					sTitle = this.getResourceBundle().getText("detailLineItemTableHeading");
 				}
+				if (this._getProperty("ReportsTo") === null) {
+					manager = {
+						mTitleOfCourtesy: "I am the Boss",
+						mFirstName: "",
+						mLastName: "",
+
+					};
+				} else {
+					var managerPath = "/Employees(" + this._getProperty("ReportsTo").toString() + ")";
+					manager = {
+						mTitleOfCourtesy: this._getProperty(managerPath + "/TitleOfCourtesy"),
+						mFirstName: this._getProperty(managerPath + "/FirstName"),
+						mLastName: this._getProperty(managerPath + "/LastName"),
+						mPath: managerPath
+
+					};
+				}
+				oViewModel.setProperty("/lineManager", manager);
+				oViewModel.setProperty("/hasReportees", iTotalItems > 0);
+
 				oViewModel.setProperty("/lineItemListTitle", sTitle);
 			}
+			this.showMap();
 		},
-
+		navigateToManager: function (oEvent) {
+			console.log("TODO");
+		},
 		/* =========================================================== */
 		/* begin: internal methods                                     */
 		/* =========================================================== */
@@ -163,7 +201,7 @@ sap.ui.define([
 				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
-			this.showMap();
+
 		},
 
 		/**
@@ -220,6 +258,7 @@ sap.ui.define([
 				oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			oViewModel.setProperty("/shareSendEmailMessage",
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+
 		},
 
 		_onMetadataLoaded: function () {

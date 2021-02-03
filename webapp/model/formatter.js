@@ -27,10 +27,14 @@ sap.ui.define([], function () {
 			return "Phone: "+ homeNumber+" - "+extension;
 		},
 		dateFormatter: function(dateStr){
-			console.log(dateStr);
-			console.log(dateStr ? (new Date(dateStr).toLocaleDateString()) : "Not Available");
+			
 			return dateStr ? new Date(dateStr).toLocaleDateString() : "Not Available";
+		},
+		getMyManagerName: function(details){
+			if(details !== undefined){
+			return	details.mTitleOfCourtesy + details.mFirstName + details.mLastName
+			
+			}
 		}
-		
 	};
 });

@@ -3,7 +3,7 @@
 	xmlns="sap.m"
 	controllerName="com.basf.techInterview.test1.CompanyEmployees.controller.Detail">
 	<ObjectHeader
-		icon="{parts: [ {path:'Photo'}], formatter: '.formatter.setPhotograph'}"
+		icon="{parts: [ {path:'Photo'}], formatter: '.formatter.setPhotograph'}" 
 		iconDensityAware="false"
 		iconAlt="{FirstName}"
 		imageShape="Circle"
@@ -22,15 +22,17 @@
 			<ObjectAttribute title="Country" text="{Country}" />
 			<ObjectAttribute title="Phone" text="{HomePhone}" />
 			<ObjectAttribute title="Extension" text="{Extension}" />
-			
+			<ObjectAttribute title="Line Manager" active="true" press="navigateToManager" text="{parts:[{path:'detailView>/lineManager'}], formatter:'.formatter.getMyManagerName'}" />
 	</ObjectHeader>
+	
 	<VBox>
+		
 		<Panel
 	
 		headerText="About {TitleOfCourtesy} {LastName}"
 		width="100%">
 		<Title
-			id="WrappingTitle"
+			
 			wrapping="true"
 			text="{Notes}" />
 	</Panel>
@@ -38,15 +40,58 @@
 		expanded="true"
 		class="sapUiResponsiveContentPadding">
 		<items>
-			<IconTabFilter text="Hirearchy" key="hirearchy">
-				<Text text="Info content goes here ..." />
-			</IconTabFilter>
-			<IconTabFilter text="Map" key="map">
-				<HBox width="20rem" height="15rem" id="idGoogleMaps" fitContainer = "true" justifyContent="Center" alignContent="Center" alignItems="Center">
-					
-				</HBox>
-			</IconTabFilter>
 			
+			<IconTabFilter text="Map" key="map">
+				<Panel width="20rem" height="15rem" id="idGoogleMaps">
+					
+				</Panel>
+			</IconTabFilter>
+			<IconTabFilter text="Hirearchy" key="hirearchy" visible="{detailView>/hasReportees}">
+				<Table
+				id="lineItemsList"
+				width="auto"
+				items="{Employees1}"
+				updateFinished=".onListUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}"
+				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+				<headerToolbar>
+					<Toolbar>
+						<Title
+							id="lineItemsTitle"
+							text="{detailView>/lineItemListTitle}"
+							titleStyle="H3"
+							level="H3"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+						<Column width="2.5rem">
+						
+					</Column>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="End">
+						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Avatar src="{parts: [ {path:'Photo'}], formatter: '.formatter.setPhotograph'}" displaySize="XS" />
+							<ObjectIdentifier
+								title="{TitleOfCourtesy} {FirstName} {LastName}"
+								text="{City}"/>
+							<ObjectNumber
+								
+								unit="{HomePhone}/{Extension}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			</IconTabFilter>
 		</items>
 	</IconTabBar>
 	</VBox>
