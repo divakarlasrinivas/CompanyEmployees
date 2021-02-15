@@ -24,7 +24,7 @@ sap.ui.define([], function () {
 			return image ?  "data:image/png;base64," + image.substr(104) : image;
 		},
 		phoneNumberWithExtension: function(homeNumber, extension){
-			return "Phone: "+ homeNumber+" - "+extension;
+			return "m:"+ homeNumber+" - "+extension;
 		},
 		dateFormatter: function(dateStr){
 			

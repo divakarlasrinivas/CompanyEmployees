@@ -1,99 +1,58 @@
-<mvc:View
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	controllerName="com.basf.techInterview.test1.CompanyEmployees.controller.Detail">
-	<ObjectHeader
-		icon="{parts: [ {path:'Photo'}], formatter: '.formatter.setPhotograph'}" 
-		iconDensityAware="false"
-		iconAlt="{FirstName}"
-		imageShape="Circle"
-		responsive="true"
-		title="{TitleOfCourtesy} {FirstName} {LastName}"
-		intro="{Title}"
-		class="sapUiResponsivePadding--header" >
-			<ObjectAttribute title="Employee Id" text="{EmployeeID}" />
-			<ObjectAttribute title="Date of Birth" text = "{parts:[{path:'BirthDate'}], formatter:'.formatter.dateFormatter'}"/> 
-			<ObjectAttribute title="Date of Hiring" text= "{parts:[{path:'BirthDate'}], formatter:'.formatter.dateFormatter'}"/> 
-			<ObjectAttribute title="Address" text="{Address}" />
-			<ObjectAttribute title="City" text="{City}" />
-			<ObjectAttribute title="Region" text="{= ${Region}  ? ${Region} : 'Not Available' }" />
-			
-			<ObjectAttribute title="Post Code" text="{PostalCode}" />
-			<ObjectAttribute title="Country" text="{Country}" />
-			<ObjectAttribute title="Phone" text="{HomePhone}" />
-			<ObjectAttribute title="Extension" text="{Extension}" />
-			<ObjectAttribute title="Line Manager" active="{=${ReportsTo} === null ?false:true}" press="navigateToManager" text="{parts:[{path:'detailView>/lineManager'}], formatter:'.formatter.getMyManagerName'}" />
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.basf.techInterview.test1.CompanyEmployees.controller.Detail">
+	<ObjectHeader icon="{parts: [ {path:'Photo'}], formatter: '.formatter.setPhotograph'}" iconDensityAware="false" iconAlt="{FirstName}"
+		imageShape="Circle" responsive="true" title="{TitleOfCourtesy} {FirstName} {LastName}" intro="{Title}"
+		class="sapUiResponsivePadding--header">
+		<ObjectAttribute title="Employee Id" text="{EmployeeID}"/>
+		<ObjectAttribute title="Date of Birth" text="{parts:[{path:'BirthDate'}], formatter:'.formatter.dateFormatter'}"/>
+		<ObjectAttribute title="Date of Hiring" text="{parts:[{path:'BirthDate'}], formatter:'.formatter.dateFormatter'}"/>
+		<ObjectAttribute title="Address" text="{Address}"/>
+		<ObjectAttribute title="City" text="{City}"/>
+		<ObjectAttribute title="Region" text="{= ${Region} ? ${Region} : 'Not Available' }"/>
+		<ObjectAttribute title="Post Code" text="{PostalCode}"/>
+		<ObjectAttribute title="Country" text="{Country}"/>
+		<ObjectAttribute title="Phone" text="{HomePhone}"/>
+		<ObjectAttribute title="Extension" text="{Extension}"/>
+		<ObjectAttribute title="Line Manager" active="{=${ReportsTo} === null ?false:true}" press="navigateToManager"
+			text="{parts:[{path:'detailView>/lineManager'}], formatter:'.formatter.getMyManagerName'}"/>
 	</ObjectHeader>
-	
 	<VBox>
-		
-		<Panel
-	
-		headerText="About {TitleOfCourtesy} {LastName}"
-		width="100%">
-		<Title
-			
-			wrapping="true"
-			text="{Notes}" />
-	</Panel>
-	<IconTabBar select="onTabChange"
-		expanded="true"
-		class="sapUiResponsiveContentPadding">
-		<items>
-			
-			<IconTabFilter text="Map" key="map">
-				<Panel width="20rem" height="15rem" id="idGoogleMaps">
-					
-				</Panel>
-			</IconTabFilter>
-			<IconTabFilter text="Hirearchy" key="hirearchy" visible="{detailView>/hasReportees}">
-				<Table
-				id="lineItemsList"
-				width="auto"
-				items="{Employees1}"
-				updateFinished=".onListUpdateFinished"
-				noDataText="{i18n>detailLineItemTableNoDataText}"
-				busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-				<headerToolbar>
-					<Toolbar>
-						<Title
-							id="lineItemsTitle"
-							text="{detailView>/lineItemListTitle}"
-							titleStyle="H3"
-							level="H3"/>
-					</Toolbar>
-				</headerToolbar>
-				<columns>
-						<Column width="2.5rem">
-						
-					</Column>
-					<Column>
-						<Text text="{i18n>detailLineItemTableIDColumn}"/>
-					</Column>
-					<Column
-						minScreenWidth="Tablet"
-						demandPopin="true"
-						hAlign="End">
-						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
-					</Column>
-				</columns>
-				<items>
-					<ColumnListItem>
-						<cells>
-							<Avatar src="{parts: [ {path:'Photo'}], formatter: '.formatter.setPhotograph'}" displaySize="XS" />
-							<ObjectIdentifier
-								title="{TitleOfCourtesy} {FirstName} {LastName}"
-								text="{City}"/>
-							<ObjectNumber
-								
-								unit="{HomePhone}/{Extension}"/>
-						</cells>
-					</ColumnListItem>
-				</items>
-			</Table>
-			</IconTabFilter>
-		</items>
-	</IconTabBar>
+		<Panel headerText="About {TitleOfCourtesy} {LastName}" width="100%">
+			<Title wrapping="true" text="{Notes}"/>
+		</Panel>
+		<IconTabBar select="onTabChange" expanded="true" class="sapUiResponsiveContentPadding">
+			<items>
+				<IconTabFilter text="Map" key="map">
+					<Panel width="20rem" height="15rem" id="idGoogleMaps"></Panel>
+				</IconTabFilter>
+				<IconTabFilter text="Hirearchy" key="hirearchy" visible="{detailView>/hasReportees}">
+					<Table id="lineItemsList" width="auto" items="{Employees1}" updateFinished=".onListUpdateFinished"
+						noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+						<headerToolbar>
+							<Toolbar>
+								<Title id="lineItemsTitle" text="{detailView>/lineItemListTitle}" titleStyle="H3" level="H3"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="2.5rem"></Column>
+							<Column>
+								<Text text="{i18n>detailLineItemTableIDColumn}"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+								<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Avatar src="{parts: [ {path:'Photo'}], formatter: '.formatter.setPhotograph'}" displaySize="XS"/>
+									<ObjectIdentifier title="{TitleOfCourtesy} {FirstName} {LastName}" text="{City}"/>
+									<ObjectNumber unit="{HomePhone}/{Extension}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
 	</VBox>
-
-	</mvc:View>
+</mvc:View>

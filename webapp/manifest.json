@@ -16,7 +16,8 @@
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
-					"localUri": "localService/metadata.xml"
+					"localUri": "localService/metadata.xml",
+					"annotations": []
 				}
 			}
 		},
@@ -96,7 +97,7 @@
 				"name": "managerDetails",
 				"pattern": "Employees/{managerId}",
 				"titleTarget": "",
-				"greedy": false,
+				"greedy": true,
 				"target": ["managerDetails"]
 			}],
 			"targets": {
@@ -123,15 +124,21 @@
 				},
 				"managerDetails": {
 					"viewType": "",
-					"transition": "",
-					"clearControlAggregation": "",
+					"transition": "flip",
+					"clearControlAggregation": false,
 					"viewName": "Detail",
-					"viewLevel": 3,
+					"viewLevel": 4,
 					"viewId": "detail",
-					"controlAggregation": "midColumnPages"
+					"controlAggregation": "endColumnPages"
 				}
 			}
 		},
-		"flexEnabled": true
+		"flexEnabled": true,
+		"resources": {
+			"css": [{
+				"uri": "css/style.css",
+				"id": ""
+			}]
+		}
 	}
 }

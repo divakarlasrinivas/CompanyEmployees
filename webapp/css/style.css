@@ -1,0 +1,15 @@
+:root {
+  --basfHeaderColor: rgb(3 72 145);
+  /*#21a0d2*/
+}
+.sapMText.sapMObjLTitle {
+    vertical-align: top;
+    word-break: break-word;
+    font-size: 1.0rem;
+}
+.bgHeader {
+	background-color: var(--basfHeaderColor) !important; 
+}
+.sapMObjLNumberDiv .sapMObjectNumber .sapMObjectNumberText {
+    font-size: 1.0rem;
+}

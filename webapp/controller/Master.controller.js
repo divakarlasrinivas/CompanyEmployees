@@ -112,7 +112,23 @@ sap.ui.define([
 			var sQuery = oEvent.getParameter("query");
 
 			if (sQuery) {
-				this._oListFilterState.aSearch = [new Filter("LastName", FilterOperator.Contains, sQuery)];
+				// this._oListFilterState.aSearch = [new Filter("LastName", FilterOperator.Contains, sQuery),
+				// new Filter("FirstName", FilterOperator.Contains, sQuery),
+				// new Filter("Title", FilterOperator.Contains, sQuery),
+				// new Filter("Address", FilterOperator.Contains, sQuery)
+				// ];
+				
+				this._oListFilterState.aSearch = [new Filter({
+			 filters: [
+				      new Filter("FirstName", FilterOperator.Contains, sQuery),
+				      new Filter("LastName", FilterOperator.Contains, sQuery),
+				      new Filter("Title", FilterOperator.Contains, sQuery),
+				      new Filter("Address", FilterOperator.Contains, sQuery),
+				      new Filter("City", FilterOperator.Contains, sQuery)
+				    ],
+				    and: false,
+				  })];
+								
 			} else {
 				this._oListFilterState.aSearch = [];
 			}

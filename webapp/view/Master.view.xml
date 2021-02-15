@@ -31,7 +31,7 @@
 					</OverflowToolbar>
 				</headerToolbar>
 				<items>
-					<ObjectListItem icon="{path:'Photo', formatter: '.formatter.setPhotograph'}" iconDensityAware="false" type="Navigation" intro="{Title}"
+					<ObjectListItem class = "sapMTextNoWrap" icon="{path:'Photo', formatter: '.formatter.setPhotograph'}" iconDensityAware="false" type="Navigation" intro="{Title}"
 						press=".onSelectionChange" title="{TitleOfCourtesy} {FirstName} {LastName}" number="{ path: 'City' }" 
 						numberUnit="{ parts: [ {path:'HomePhone'}, {path:'Extension'} ], formatter:'.formatter.phoneNumberWithExtension' }"></ObjectListItem>
 				</items>

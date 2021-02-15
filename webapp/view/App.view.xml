@@ -6,9 +6,9 @@
 	xmlns:f="sap.f"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:tnt="sap.tnt">
-	<tnt:ToolHeader>
+	<tnt:ToolHeader class="bgHeader">
 		<Button icon="sap-icon://menu2" type="Transparent" />
-		<Image src="./assets/logo.png" width="48px" height="24px"/>
+		<Image src="./assets/logo.svg" width="76px" height="28px"/>
 		<Text text="Test I by Srinivas Divakarla" wrapping="false" />
 		<ToolbarSpacer />
 	
