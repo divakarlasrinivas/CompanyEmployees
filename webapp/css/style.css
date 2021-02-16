@@ -5,12 +5,12 @@
 		green: #49ac41
 		red: #c30216
 	*/
-    --basfBGColor: #034891
+    --basfBGColor: #034891;
         /* dark blue*/
         /*--basfBGColor: #21a0d2;*/
         /*--basfBGColor: #49ac41*/
         /* --basfBGColor: #c30216 */
-    --basfText1Rem: 1rem
+    --basfText1Rem: 1rem;
 }
 
 .bgHeader {
