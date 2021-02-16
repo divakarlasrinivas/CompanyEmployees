@@ -1,15 +1,50 @@
 :root {
-  --basfHeaderColor: rgb(3 72 145);
-  /*#21a0d2*/
+    /* uncoment only one of the lines below to see different variations of basf colors
+		dark blue: rgb(3 72 145) 
+		light blue: #21a0d2 
+		green: #49ac41
+		red: #c30216
+	*/
+    --basfBGColor: #034891
+        /* dark blue*/
+        /*--basfBGColor: #21a0d2;*/
+        /*--basfBGColor: #49ac41*/
+        /* --basfBGColor: #c30216 */
+    --basfText1Rem: 1rem
 }
-.sapMText.sapMObjLTitle {
-    vertical-align: top;
-    word-break: break-word;
-    font-size: 1.0rem;
-}
+
 .bgHeader {
-	background-color: var(--basfHeaderColor) !important; 
+    background-color: var(--basfBGColor) !important;
 }
+
 .sapMObjLNumberDiv .sapMObjectNumber .sapMObjectNumberText {
-    font-size: 1.0rem;
+    font-size: var(--basfText1Rem) !important;
+    ;
+}
+
+.sapMLIB.sapMLIBSelected {
+    background: var(--basfBGColor) !important;
+}
+
+.sapMText.sapMObjLTitle {
+    vertical-align: top !important;
+    word-break: break-word !important;
+    font-size: var(--basfText1Rem) !important;
+}
+
+.sapMITBTextOnly .sapMITBFilterDefault.sapMITBSelected .sapMITBText {
+    color: var(--basfBGColor) !important;
+    font-size: medium !important;
+}
+
+.sapMITBSelected .sapMITBContentArrow::after {
+    background: var(--basfBGColor) !important;
+}
+
+.sapMTB-Info-CTX.sapMTB.sapMTBActive {
+    background: var(--basfBGColor) !important;
+}
+
+.sapMTB-Info-CTX.sapMTB.sapMTBActive>.sapMTitle {
+    color: #fff;
 }

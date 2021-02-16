@@ -30,7 +30,7 @@
 		"technology": "UI5",
 		"icons": {
 			"icon": "sap-icon://detail-view",
-			"favIcon": "",
+			"favIcon": "https://www.basf.com/etc.clientlibs/basf/wcm/clientlibs/clientlib-base/resources/brand-icon/favicon.ico",
 			"phone": "",
 			"phone@2": "",
 			"tablet": "",
@@ -104,7 +104,8 @@
 				"master": {
 					"viewName": "Master",
 					"viewLevel": 1,
-					"viewId": "master"
+					"viewId": "master",
+					"controlAggregation": "beginColumnPages"
 				},
 				"object": {
 					"viewName": "Detail",

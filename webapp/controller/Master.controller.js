@@ -195,11 +195,11 @@ sap.ui.define([
 			// combine the filter array and the filter string
 			aFilterItems.forEach(function (oItem) {
 				switch (oItem.getKey()) {
-					case "Filter1" :
-						aFilters.push(new Filter("EmployeeID", FilterOperator.LE, 100));
+					case "City" :
+						aFilters.push(new Filter("City", FilterOperator.Contains, ""));
 						break;
-					case "Filter2" :
-						aFilters.push(new Filter("EmployeeID", FilterOperator.GT, 100));
+					case "Title" :
+						aFilters.push(new Filter("Title", FilterOperator.Contains, ""));
 						break;
 					default :
 						break;

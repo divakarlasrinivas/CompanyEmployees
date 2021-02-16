@@ -1,0 +1,10 @@
+#
+#Tue Feb 16 16:12:05 UTC 2021
+URL=https\://services.odata.org/
+Name=BASF_NWS
+ProxyType=Internet
+Type=HTTP
+WebIDEEnabled=true
+WebIDEUsage=odata_gen
+Authentication=NoAuthentication
+Description=Destination created to Northwind for BASF test
